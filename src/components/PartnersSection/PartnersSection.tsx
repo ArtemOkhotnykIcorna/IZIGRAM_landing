@@ -5,10 +5,10 @@ import styles from './PartnersSection.module.css'
 
 const topRowPartners = [
   {
-    name: "Google",
-    logo: "/img/partners/google.svg",
-    url: "https://google.com",
-    backgroundColor: "#4285f41a",
+    name: "Icorna",
+    logo: "/img/partners/icorn.svg",
+    url: "https://icorna.com",
+    backgroundColor: "#ff8c001a", 
   },
   {
     name: "Airbnb",
@@ -70,14 +70,21 @@ const PartnersSection = () => {
                 <Image
                   src={partner.logo}
                   alt={partner.name}
-                  width={100}
-                  height={50}
-                  style={{ objectFit: 'contain' }}
+                  width={120}
+                  height={60}
+                  style={{ 
+                    objectFit: 'contain',
+                    maxWidth: '70%',
+                    maxHeight: '70%',
+                    width: 'auto',
+                    height: 'auto'
+                  }}
+                  priority={false}
                 />
               </a>
             ))}
           </div>
-
+          
           {/* Bottom row partners with title */}
           <div className={styles.partnersBottomRow}>
             {bottomRowPartners.slice(0, 2).map((partner) => (
@@ -94,7 +101,14 @@ const PartnersSection = () => {
                   alt={partner.name}
                   width={100}
                   height={50}
-                  style={{ objectFit: 'contain' }}
+                  style={{ 
+                    objectFit: 'contain',
+                    maxWidth: '70%',
+                    maxHeight: '70%',
+                    width: 'auto',
+                    height: 'auto'
+                  }}
+                  priority={false}
                 />
               </a>
             ))}
@@ -117,7 +131,14 @@ const PartnersSection = () => {
                   alt={partner.name}
                   width={100}
                   height={50}
-                  style={{ objectFit: 'contain' }}
+                  style={{ 
+                    objectFit: 'contain',
+                    maxWidth: '70%',
+                    maxHeight: '70%',
+                    width: 'auto',
+                    height: 'auto'
+                  }}
+                  priority={false}
                 />
               </a>
             ))}

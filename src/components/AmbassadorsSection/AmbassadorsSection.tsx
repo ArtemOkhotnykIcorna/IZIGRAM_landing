@@ -53,7 +53,54 @@ const ambassadors = [
     image: "/img/ambassadors/portrait-woman4.jpeg",
     instagram: "https://instagram.com",
   },
-  // ... more ambassadors
+  {
+    id: 7,
+    name: "Olivia",
+    username: "Olivia",
+    followers: "1.5M subs",
+    image: "/img/ambassadors/portrait-woman5.jpeg",
+    instagram: "https://instagram.com",
+  },
+  {
+    id: 8,
+    name: "Noah",
+    username: "Noah",
+    followers: "1.7M subs",
+    image: "/img/ambassadors/portrait-woman6.jpeg",
+    instagram: "https://instagram.com",
+  },
+  {
+    id: 9,
+    name: "Isabella",
+    username: "Isabella",
+    followers: "2.1M subs",
+    image: "/img/ambassadors/portrait-woman7.jpeg",
+    instagram: "https://instagram.com",
+  },
+  {
+    id: 10,
+    name: "Lucas",
+    username: "Lucas",
+    followers: "750K subs",
+    image: "/img/ambassadors/portrait-woman.jpeg",
+    instagram: "https://instagram.com",
+  },
+  {
+    id: 11,
+    name: "Ethan",
+    username: "Ethan",
+    followers: "3.2M subs",
+    image: "/img/ambassadors/portrait-man3.jpeg",
+    instagram: "https://instagram.com",
+  },
+  {
+    id: 12,
+    name: "Charlotte",
+    username: "Charlotte",
+    followers: "1.9M subs",
+    image: "/img/ambassadors/portrait-man2.jpeg",
+    instagram: "https://instagram.com",
+  }
 ]
 
 const AmbassadorsSection = () => {
@@ -63,8 +110,8 @@ const AmbassadorsSection = () => {
     setIsCollapsed(!isCollapsed)
   }
 
-  const renderAmbassadorCard = (ambassador: any) => (
-    <div key={ambassador.id} className={styles.ambassadorCard}>
+  const renderAmbassadorCard = (ambassador: any, index: number) => (
+    <div key={`${ambassador.id}-${index}`} className={styles.ambassadorCard}>
       <div className={styles.hexagonBorder}>
         <div className={styles.hexagonContent}>
           <Image
@@ -87,8 +134,18 @@ const AmbassadorsSection = () => {
     </div>
   )
 
-  const row1 = ambassadors.slice(0, Math.ceil(ambassadors.length / 2))
-  const row2 = ambassadors.slice(Math.ceil(ambassadors.length / 2))
+  // Создаем бесконечные ряды без пустых мест
+  const createInfiniteRow = (ambassadorsList: any[]) => {
+    // Дублируем массив достаточное количество раз для бесшовной анимации
+    const repeatedArray = []
+    for (let i = 0; i < 4; i++) {
+      repeatedArray.push(...ambassadorsList)
+    }
+    return repeatedArray
+  }
+
+  const row1 = createInfiniteRow(ambassadors.slice(0, 6))
+  const row2 = createInfiniteRow(ambassadors.slice(6, 12))
 
   return (
     <section className={`${styles.section} ${styles.bottomSpacing}`} data-aos="fade-up">
@@ -107,13 +164,13 @@ const AmbassadorsSection = () => {
             <div className={styles.ambassadorsScrollContainer}>
               <div className={styles.ambassadorsRows}>
                 <div className={`${styles.ambassadorRow} ${styles.row1}`}>
-                  {row1.concat(row1).map((ambassador, index) => 
-                    renderAmbassadorCard({...ambassador, id: `${ambassador.id}-${index}`})
+                  {row1.map((ambassador, index) => 
+                    renderAmbassadorCard(ambassador, index)
                   )}
                 </div>
                 <div className={`${styles.ambassadorRow} ${styles.row2}`}>
-                  {row2.concat(row2).map((ambassador, index) => 
-                    renderAmbassadorCard({...ambassador, id: `${ambassador.id}-${index}`})
+                  {row2.map((ambassador, index) => 
+                    renderAmbassadorCard(ambassador, index)
                   )}
                 </div>
               </div>

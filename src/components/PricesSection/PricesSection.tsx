@@ -10,7 +10,15 @@ import styles from './PricesSection.module.css'
 // Import Swiper styles
 import 'swiper/css'
 
-const cryptoData = [
+interface CryptoData {
+  icon: string
+  title: string
+  price: string
+  percent: string
+  type: 'green' | 'red'
+}
+
+const cryptoData: CryptoData[] = [
   {
     icon: "/img/cryptocurrencies/btc.svg",
     title: "BTC",
@@ -48,58 +56,75 @@ const cryptoData = [
   }
 ]
 
-const PricesSection = () => {
-  const CryptoTag = ({ crypto }: { crypto: typeof cryptoData[0] }) => (
-    <div className={`${styles.cryptoTag} ${crypto.type === 'green' ? styles.cryptoTagGreen : styles.cryptoTagRed}`}>
-      <Image
-        className={styles.cryptoTagIcon}
-        src={crypto.icon}
-        alt={crypto.title}
-        width={32}
-        height={32}
-      />
-      <h3 className={styles.cryptoTagTitle}>{crypto.title}</h3>
-      <div className={styles.cryptoTagPrice}>{crypto.price}</div>
-      <div className={styles.cryptoTagPercent}>{crypto.percent}</div>
-    </div>
-  )
+interface CryptoTagProps {
+  crypto: CryptoData
+}
+
+const CryptoTag: React.FC<CryptoTagProps> = ({ crypto }) => (
+  <div className={`${styles.cryptoTag} ${crypto.type === 'green' ? styles.cryptoTagGreen : styles.cryptoTagRed}`}>
+    <Image
+      className={styles.cryptoTagIcon}
+      src={crypto.icon}
+      alt={crypto.title}
+      width={32}
+      height={32}
+    />
+    <h3 className={styles.cryptoTagTitle}>{crypto.title}</h3>
+    <div className={styles.cryptoTagPrice}>{crypto.price}</div>
+    <div className={styles.cryptoTagPercent}>{crypto.percent}</div>
+  </div>
+)
+
+const PricesSection: React.FC = () => {
+  const swiperRef = useRef<any>(null)
+
+  // Triple the crypto data for seamless looping
+  const extendedCryptoData = [...cryptoData, ...cryptoData, ...cryptoData]
 
   return (
     <section className={`${styles.pricesSection} ${styles.pricesSectionTopSpacing}`}>
+      {/* Crypto Ticker */}
       <div className={styles.pricesSectionCryptoTicker} data-aos="fade-up">
         <Swiper
+          ref={swiperRef}
           className={styles.ticker}
           spaceBetween={12}
           slidesPerView="auto"
           loop={true}
-          speed={3000}
+          speed={8000}
           autoplay={{
             delay: 0,
             disableOnInteraction: false,
+            reverseDirection: false,
           }}
           modules={[Autoplay]}
+          allowTouchMove={false}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper
+          }}
         >
-          {[...cryptoData, ...cryptoData, ...cryptoData].map((crypto, index) => (
-            <SwiperSlide key={index} className={styles.swiperSlide}>
+          {[...extendedCryptoData, ...extendedCryptoData].map((crypto, index) => (
+            <SwiperSlide key={`${crypto.title}-${index}`} className={styles.swiperSlide}>
               <CryptoTag crypto={crypto} />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
       
+      {/* Main Content */}
       <div className={styles.container}>
         <div className={styles.pricesSectionRow}>
           <div className={styles.pricesSectionCol} data-aos="fade-left">
-            <h2 className={`${styles.title} fw-700 ${styles.pricesSectionTitle}`}>
+            <h2 className={`${styles.title} ${styles.pricesSectionTitle}`}>
               A simple way to manage<br />cryptocurrency <br />around the world
             </h2>
-            <p className={`${styles.pricesSectionText} fw-500 text-color-gray-350`}>
+            <p className={`${styles.pricesSectionText} ${styles.textColorGray350}`}>
               The freedom to manage your finances without the hassle.
               Minimalistic design, convenient{' '}
-              <span className="text-color-light">P2P marketplace</span> and all
+              <span className={styles.textColorLight}>P2P marketplace</span> and all
               key features in one place. Deposit, store, send and exchange
               cryptocurrency in a couple of clicks.{' '}
-              <span className="text-color-light">Open a card</span> to instantly
+              <span className={styles.textColorLight}>Open a card</span> to instantly
               convert crypto to fiat and pay for your purchase anywhere in
               the world.
             </p>
@@ -114,27 +139,31 @@ const PricesSection = () => {
         </div>
       </div>
       
+      {/* Slogan Ticker - Desktop Only */}
       <div className={styles.pricesSectionSloganTicker} data-aos="fade-up">
         <Swiper
-          className={styles.ticker}
+          className={`${styles.ticker} ${styles.sloganTicker}`}
           spaceBetween={0}
           slidesPerView="auto"
           loop={true}
-          speed={5000}
+          speed={15000}
           autoplay={{
             delay: 0,
             disableOnInteraction: false,
+            reverseDirection: true,
           }}
           modules={[Autoplay]}
+          allowTouchMove={false}
         >
-          {[1, 2, 3].map((item) => (
-            <SwiperSlide key={item}>
+          {[...Array(8)].map((_, index) => (
+            <SwiperSlide key={index} className={styles.sloganSlide}>
               <Image
                 className={styles.pricesSectionSlogan}
                 src="/img/prices-section/sand-swap-buy.svg"
-                alt={`Sand swap buy slogan ${item}`}
+                alt={`Sand swap buy slogan ${index + 1}`}
                 width={1225}
                 height={145}
+                priority={false}
               />
             </SwiperSlide>
           ))}

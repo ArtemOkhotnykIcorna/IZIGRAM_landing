@@ -627,12 +627,10 @@
   }
   
   /* Style for error states */
-  .input:invalid {
-    border: 1px solid #ff6b6b;
-  }
+ 
   
   .input:invalid:focus {
-    outline-color: #ff6b6b;
+    outline-color: #fa99ff;
   }
   
   /* Success state for form */
