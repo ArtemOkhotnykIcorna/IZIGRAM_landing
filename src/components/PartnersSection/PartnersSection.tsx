@@ -67,20 +67,18 @@ const PartnersSection = () => {
                 className={styles.partnerCard}
                 style={{ backgroundColor: partner.backgroundColor }}
               >
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={120}
-                  height={60}
-                  style={{ 
-                    objectFit: 'contain',
-                    maxWidth: '70%',
-                    maxHeight: '70%',
-                    width: 'auto',
-                    height: 'auto'
-                  }}
-                  priority={false}
-                />
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    fill
+                    sizes="(max-width: 480px) 60vw, (max-width: 767px) 70vw, (max-width: 991px) 25vw, 20vw"
+                    style={{ 
+                      objectFit: 'contain',
+                    }}
+                    priority={false}
+                  />
+                </div>
               </a>
             ))}
           </div>
@@ -96,20 +94,18 @@ const PartnersSection = () => {
                 className={styles.partnerCard}
                 style={{ backgroundColor: partner.backgroundColor }}
               >
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={100}
-                  height={50}
-                  style={{ 
-                    objectFit: 'contain',
-                    maxWidth: '70%',
-                    maxHeight: '70%',
-                    width: 'auto',
-                    height: 'auto'
-                  }}
-                  priority={false}
-                />
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    fill
+                    sizes="(max-width: 480px) 60vw, (max-width: 767px) 45vw, (max-width: 991px) 20vw, 15vw"
+                    style={{ 
+                      objectFit: 'contain',
+                    }}
+                    priority={false}
+                  />
+                </div>
               </a>
             ))}
             
@@ -126,20 +122,18 @@ const PartnersSection = () => {
                 className={styles.partnerCard}
                 style={{ backgroundColor: partner.backgroundColor }}
               >
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={100}
-                  height={50}
-                  style={{ 
-                    objectFit: 'contain',
-                    maxWidth: '70%',
-                    maxHeight: '70%',
-                    width: 'auto',
-                    height: 'auto'
-                  }}
-                  priority={false}
-                />
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    fill
+                    sizes="(max-width: 480px) 60vw, (max-width: 767px) 45vw, (max-width: 991px) 20vw, 15vw"
+                    style={{ 
+                      objectFit: 'contain',
+                    }}
+                    priority={false}
+                  />
+                </div>
               </a>
             ))}
           </div>

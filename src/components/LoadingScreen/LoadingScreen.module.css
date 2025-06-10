@@ -33,11 +33,13 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    
   }
   
   .hexagon {
     width: 80px;
     height: 80px;
+    
     position: relative;
     animation: pulse 2s ease-in-out infinite;
   }
@@ -45,22 +47,12 @@
   .hexagonInner {
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, #a399ff, #fd99bc, #fa99ff);
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: url('/img/logo.svg') center / contain no-repeat;    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     animation: rotate 4s linear infinite;
     position: relative;
   }
   
-  .hexagonInner::before {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
-    background: #000000;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  }
+
   
   .brandName {
     font-size: 2rem;

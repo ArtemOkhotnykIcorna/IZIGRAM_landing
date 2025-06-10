@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
 import styles from './AmbassadorsSection.module.css'
 
 const ambassadors = [
@@ -126,11 +127,15 @@ const AmbassadorsSection = () => {
         <div className={styles.ambassadorUsername}>{ambassador.username}</div>
         <div className={styles.ambassadorFollowers}>{ambassador.followers}</div>
       </div>
-      <div className={styles.linkIcon}>
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
-        </svg>
-      </div>
+      <a 
+        href={ambassador.instagram} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className={styles.linkIcon}
+        aria-label={`Visit ${ambassador.username}'s Instagram`}
+      >
+        <ExternalLink size={16} />
+      </a>
     </div>
   )
 
@@ -182,18 +187,14 @@ const AmbassadorsSection = () => {
           <button 
             className={styles.ambassadorsToggleBtn}
             onClick={toggleCollapsed}
+            aria-label={isCollapsed ? 'Show all ambassadors' : 'Show fewer ambassadors'}
           >
             {isCollapsed ? 'Show All' : 'Show Less'}
-            <svg 
-              viewBox="0 0 20 20" 
-              style={{ transform: isCollapsed ? 'rotate(0deg)' : 'rotate(180deg)' }}
-            >
-              <path
-                d="M1.25 5.625L9.52885 14.1646C9.58928 14.231 9.66226 14.284 9.7433 14.3201C9.82433 14.3563 9.9117 14.375 10 14.375C10.0883 14.375 10.1757 14.3563 10.2567 14.3201C10.3377 14.284 10.4107 14.231 10.4712 14.1646L18.75 5.625"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            {isCollapsed ? (
+              <ChevronDown size={20} />
+            ) : (
+              <ChevronUp size={20} />
+            )}
           </button>
         </div>
       </div>
